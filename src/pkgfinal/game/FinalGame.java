@@ -14,7 +14,11 @@ public class FinalGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Settings game1 = new Settings();
+        game1.setVolume(20);
+        game1.displayVolume();
+        game1.setVolume(50);
+        game1.displayVolume();
     }
     public class Character {
         private int health;
@@ -56,7 +60,7 @@ public class FinalGame {
         }
     }
     
-    public class Settings {
+    public static class Settings {
         int volume;
         String fieldOfView;
         String textureQuality;
@@ -80,6 +84,7 @@ public class FinalGame {
             for (int i = 0; i<(100-volume); i++) {
                 System.out.print(".");
             }
+            System.out.println();
         }
         
         void setVolume(int n) {
