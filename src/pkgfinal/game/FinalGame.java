@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package pkgfinal.game;
-
+import java.util.Scanner;
 /**
  *
  * @author Farooq Ameen
@@ -14,13 +14,58 @@ public class FinalGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//        Settings game1 = new Settings();
+//        game1.setVolume(20);
+//        game1.displayVolume();
+//        game1.setVolume(50);
+//        game1.displayVolume();
+//        Character Bozo = new Character();
+//        Bozo.displayStats();
+        
+        System.out.println("Welcome to Grimm's Journey!");
+        
+        int choice;
+        
+        choice = DisplayMenu();
         Settings game1 = new Settings();
         game1.setVolume(20);
         game1.displayVolume();
         game1.setVolume(50);
         game1.displayVolume();
+        
     }
-    public class Character {
+    public static int DisplayMenu() {
+        int n=0;
+        boolean flag=false;
+        System.out.println("1. New Game\n2. Save Game\n3. Delete Save\n4. Settings\n5. Exit");
+
+        Scanner userInput = new Scanner(System.in);
+
+        do {
+//            System.out.println("Flag: " + flag);
+            System.out.print("Please enter 1-5: ");
+            n=userInput.nextInt();
+            System.out.println();
+            if (n>=1 && n<=4) {
+                flag = true;
+            }
+            else if (n==5) {
+                flag = true;
+                System.out.println("Thank you. Goodbye.");
+            }
+            else {
+                flag=false;
+                System.out.println("Invalid choice.");
+                System.out.println("End of stack.\n");
+            }
+//            System.out.println("Flag: " + flag);
+        } while (flag==false);
+        return n;
+    }
+    
+    
+    
+    public static class Character {
         private int health;
         private int mana;
         private double damageModif;
@@ -28,7 +73,7 @@ public class FinalGame {
         private static int numberOfCharacters=0;
         
         Character() {
-            type="Undefined";
+            type=null;
             health=0;
             mana=0;
             damageModif=0;
@@ -55,14 +100,17 @@ public class FinalGame {
             }   
         }
         void displayStats(){
-            //updated file, just comment
-            //1234
+            System.out.println("Character type: " + type);
+            System.out.println("Health: " + health);
+            System.out.println("Mana: " + mana);
+            System.out.println("Damage modifier: " + damageModif);
+            System.out.println("Number of characters created: " + numberOfCharacters);
         }
     }
     
     public static class Settings {
         int volume;
-        String fieldOfView;
+        int fieldOfView;
         String textureQuality;
         String effectIntensity;
         String ambientOcclusion;
@@ -149,6 +197,14 @@ public class FinalGame {
                     
             }
             System.out.println("The ambient occlusion is now: " + effectIntensity);
+        }
+        void setFieldOfView(int n) {
+            if (n>=60 && n<=1110) {
+                fieldOfView = n;
+            }
+            else {
+                System.out.println("Invalid field of view.");
+            }
         }
     }
     
