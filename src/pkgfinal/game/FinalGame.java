@@ -294,8 +294,17 @@ public class FinalGame {
             FileWriter mywriter = new FileWriter("feedback.txt");
             System.out.println("\nEnter your feedback, and press enter to submit.");
             mywriter.write(input.nextLine());
-            mywriter.close();
+
             System.out.println("\nFeedback received successfully!");
+
+            Scanner reader = new Scanner(feedback);
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                System.out.println("\nJust to confirm, your feedback was: \n" + data);
+
+                mywriter.close();
+                reader.close();
+            }
         } catch (IOException e) {
             System.out.println("File error.");
         }
