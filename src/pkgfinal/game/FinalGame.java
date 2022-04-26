@@ -4,6 +4,9 @@
  */
 package pkgfinal.game;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -45,6 +48,7 @@ public class FinalGame {
         } while (choice != 1);
 
         NewGame();
+        Feedback();
     }
 
     public static int DisplayMenu() {
@@ -152,18 +156,23 @@ public class FinalGame {
 
             charactertype = input.nextLine();
 
-            if (charactertype.equals("Warrior")) {
-                System.out.println("A warrior is born...");
-                flag = true;
-            } else if (charactertype.equals("Mage")) {
-                System.out.println("A mage, long forgotten, has risen...");
-                flag = true;
-            } else if (charactertype.equals("Ninja")) {
-                System.out.println("Born in the shadows...");
-                flag = true;
-            } else {
-                System.out.println("Incorrect character type. Try again.\n");
-                flag = false;
+            switch (charactertype) {
+                case "Warrior":
+                    System.out.println("A warrior is born...");
+                    flag = true;
+                    break;
+                case "Mage":
+                    System.out.println("A mage, long forgotten, has risen...");
+                    flag = true;
+                    break;
+                case "Ninja":
+                    System.out.println("Born in the shadows...");
+                    flag = true;
+                    break;
+                default:
+                    System.out.println("Incorrect character type. Try again.\n");
+                    flag = false;
+                    break;
             }
         } while (flag == false);
 
@@ -199,11 +208,11 @@ public class FinalGame {
 
         System.out.println("\nLoading questions...");
 
-        LinkedList question = new LinkedList<>();
-        question = ListOfQuestions();
+        LinkedList question = new LinkedList<>(ListOfQuestions());
+//        question = ListOfQuestions();
 
-        LinkedList answer = new LinkedList<>();
-        answer = ListOfAnswers();
+        LinkedList answer = new LinkedList<>(ListOfAnswers());
+//        answer = ListOfAnswers();
 
         String userAns;
         int points = 0;
@@ -224,6 +233,21 @@ public class FinalGame {
                     answer.removeFirst();
                     System.out.println("\nBoss defeated!");
                     System.out.println("Well done!");
+                    System.out.println("“⠀⠀⠀⠀⠀⠀⠀⠀⠀⡄⠀⡼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
+                            + "⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣶⡾⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
+                            + "⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣅⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
+                            + "⠀⠀⠀⠀⣠⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
+                            + "⠀⣀⣴⣾⣿⡿⠋⠀⣠⣶⣶⠿⠿⠿⠿⠷⢶⣶⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀\n"
+                            + "⢰⣿⣿⣿⣟⠀⠀⢸⣿⣿⣥⣤⣤⣄⣀⣀⣠⣬⣭⣿⠁⠀⠀⠀⠀⠀⠀⠀\n"
+                            + "⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣤⣄⠀⠀⠀⠀\n"
+                            + "⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⠀\n"
+                            + "⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠈⠙⠿⣿⣿\n"
+                            + "⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⣀⣹\n"
+                            + "⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⣀⣤⣶⡿⠿⠟\n"
+                            + "⠀⠀⠀⠀⠀⠀⠈⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠰⣿⠇⠀⠀⠀⠀\n"
+                            + "⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⡍⠉⠉⠙⠛⠛⠋⣩⣥⣤⣀⠀⠀⠀⠀⠀⠀⠀\n"
+                            + "⠀⠀⠀⠀⠀⠀⠻⢿⡋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠉⣻⡿⠿⠂⠀⠀⠀⠀⠀");
+                    System.out.println();
                 } else {
                     question.removeFirst();
                     System.out.println("Incorrect. The answer was " + answer.removeFirst() + ".");
@@ -253,5 +277,28 @@ public class FinalGame {
         a.addFirst("elephant");
         a.addFirst("88");
         return a;
+    }
+
+    public static void Feedback() {
+
+        try {
+            File feedback = new File("feedback.txt");
+            if (feedback.createNewFile()) {
+                System.out.println("Feedback file created!");
+            } else {
+                System.out.println("File already exists.");
+            }
+
+            Scanner input = new Scanner(System.in);
+
+            FileWriter mywriter = new FileWriter("feedback.txt");
+            System.out.println("\nEnter your feedback, and press enter to submit.");
+            mywriter.write(input.nextLine());
+            mywriter.close();
+            System.out.println("\nFeedback received successfully!");
+        } catch (IOException e) {
+            System.out.println("File error.");
+        }
+
     }
 }
