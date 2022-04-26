@@ -140,107 +140,101 @@ public class FinalGame {
             System.out.println("An error occured. Goodbye.");
         }
     }
+
     public static void NewGame() {
         Scanner input = new Scanner(System.in);
         boolean flag = false;
         String charactertype;
-        
+
         do {
-        System.out.println("Type in your character type (case-sensitive): ");
-        System.out.println("1. Warrior\n2. Mage\n3. Ninja");
-        
-        charactertype = input.nextLine();
-        
-        if (charactertype.equals("Warrior")) {
-            System.out.println("A warrior is born...");
-            flag = true;
-        }
-        else if (charactertype.equals("Mage")) {
-            System.out.println("A mage, long forgotten, has risen...");
-            flag = true;
-        }
-        else if (charactertype.equals("Ninja")) {
-            System.out.println("Born in the shadows...");
-            flag = true;
-        }
-        else {
-            System.out.println("Incorrect character type. Try again.\n");
-            flag = false;
-        }
+            System.out.println("Type in your character type (case-sensitive): ");
+            System.out.println("1. Warrior\n2. Mage\n3. Ninja");
+
+            charactertype = input.nextLine();
+
+            if (charactertype.equals("Warrior")) {
+                System.out.println("A warrior is born...");
+                flag = true;
+            } else if (charactertype.equals("Mage")) {
+                System.out.println("A mage, long forgotten, has risen...");
+                flag = true;
+            } else if (charactertype.equals("Ninja")) {
+                System.out.println("Born in the shadows...");
+                flag = true;
+            } else {
+                System.out.println("Incorrect character type. Try again.\n");
+                flag = false;
+            }
         } while (flag == false);
-        
+
         Character character1 = new Character();
         character1.setType(charactertype);
 
         System.out.println("Your character has been created!");
         System.out.println("\nLoading...\n");
-        
+
         System.out.println("Your character's stats are: ");
         character1.displayStats();
-        
+
         System.out.println("\nGenerating terrain...");
         Terrain terrain1 = new Terrain();
-        
+
         System.out.println("You are in a(n) " + terrain1.getTerrain() + " biome.");
-        
+
         System.out.println("\nCreating enemies...");
-        
+
         Stack battlestck = new Stack();
         Boss boss1 = new Boss();
         Enemy enemy1 = new Enemy();
-        
+
         battlestck.push(boss1.getBossType());
         battlestck.push(enemy1.getEnemyType());
-        
-        
-        System.out.println("\nEnemies: "); 
-        for (int i=0;i<2;i++) {
+
+        System.out.println("\nEnemies: ");
+        for (int i = 0; i < 2; i++) {
             System.out.println(battlestck.pop());
         }
-        
+
         System.out.println("\nBoss special: " + boss1.getBossSpecial());
-        
+
         System.out.println("\nLoading questions...");
-        
+
         LinkedList question = new LinkedList<>();
         question = ListOfQuestions();
-        
+
         LinkedList answer = new LinkedList<>();
         answer = ListOfAnswers();
-        
+
         String userAns;
-        int points=0;
+        int points = 0;
         try {
-        do {
-            System.out.println("Points = " + points);
-            System.out.println(question.getFirst());
-            System.out.println("Your answer: ");
-            userAns = input.nextLine();
-            if (answer.getFirst().equals(userAns) && points<1) {
-                points++;
-                System.out.println("\nEnemy defeated!");
-                question.removeFirst();
-                answer.removeFirst();
-            }
-            else if (answer.getFirst().equals(userAns) && points>=1) {
-                points++;
-                points++;
-                question.removeFirst();
-                answer.removeFirst();
-                System.out.println("\nBoss defeated!");
-                System.out.println("Well done!");
-            }
-            else {
-                question.removeFirst();
-                System.out.println("Incorrect. The answer was " + answer.removeFirst() + ".");
-                System.out.println("\nNext question...");
-            }
-        } while (points<=3);
-        }
-        catch (NoSuchElementException e) {
+            do {
+                System.out.println("Points = " + points);
+                System.out.println(question.getFirst());
+                System.out.println("Your answer: ");
+                userAns = input.nextLine();
+                if (answer.getFirst().equals(userAns) && points < 1) {
+                    points++;
+                    System.out.println("\nEnemy defeated!");
+                    question.removeFirst();
+                    answer.removeFirst();
+                } else if (answer.getFirst().equals(userAns) && points >= 1) {
+                    points = points + 2;
+                    question.removeFirst();
+                    answer.removeFirst();
+                    System.out.println("\nBoss defeated!");
+                    System.out.println("Well done!");
+                } else {
+                    question.removeFirst();
+                    System.out.println("Incorrect. The answer was " + answer.removeFirst() + ".");
+                    System.out.println("\nNext question...");
+                }
+            } while (points < 3);
+        } catch (NoSuchElementException e) {
             System.out.println("\nNo more questions.\nGoodbye.");
         }
     }
+
     public static LinkedList ListOfQuestions() {
         LinkedList<String> q = new LinkedList();
         q.addFirst("What is the capital of France?");
@@ -250,6 +244,7 @@ public class FinalGame {
         q.addFirst("How many keys are on a piano?");
         return q;
     }
+
     public static LinkedList ListOfAnswers() {
         LinkedList<String> a = new LinkedList();
         a.addFirst("Paris");
