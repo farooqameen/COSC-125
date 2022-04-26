@@ -17,7 +17,7 @@ public class Terrain {
     Terrain() {
         Random rand = new Random();
         int random;
-        random = rand.nextInt(3);
+        random = rand.nextInt(4);
         switch (random) {
             case (0):
                 terrain = "desert";
@@ -33,7 +33,6 @@ public class Terrain {
                 break;
         }
     }
-
     void DisplayTerrain() {
         System.out.println("You are in " + terrain + ".");
     }

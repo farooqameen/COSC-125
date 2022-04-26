@@ -25,14 +25,14 @@ public class Settings {
     void displayAll() {
         System.out.println("The current settings are: ");
         displayVolume();
-        System.out.println("Field of view: " + fieldOfView);
-        System.out.println("Texture quality: " + textureQuality);
-        System.out.println("Effect intensity: " + effectIntensity);
-        System.out.println("Ambient occlusion: " + ambientOcclusion);
+        System.out.println("2. Field of view: " + fieldOfView);
+        System.out.println("3. Texture quality: " + textureQuality);
+        System.out.println("4. Effect intensity: " + effectIntensity);
+        System.out.println("5. Ambient occlusion: " + ambientOcclusion);
     }
 
     void displayVolume() {
-        System.out.print("Volume: ");
+        System.out.print("1. Volume: ");
         for (int i = 0; i < volume; i++) {
             System.out.print("|");
         }
@@ -53,33 +53,33 @@ public class Settings {
     void setTextureQuality(String s) {
         s.toUpperCase();
         switch (s) {
-            case ("L"):
+            case ("l"):
                 textureQuality = "Low";
                 break;
-            case ("M"):
+            case ("m"):
                 textureQuality = "Medium";
                 break;
-            case ("H"):
+            case ("h"):
                 textureQuality = "High";
                 break;
             default:
                 System.out.println("Invalid texture quality.");
-                return;
+                break;
 
         }
         System.out.println("The texture quality is now: " + textureQuality);
     }
 
-    void setEffectIntenisty(String s) {
+    void setEffectIntensity(String s) {
         s.toUpperCase();
         switch (s) {
-            case ("L"):
+            case ("l"):
                 effectIntensity = "Low";
                 break;
-            case ("M"):
+            case ("m"):
                 effectIntensity = "Medium";
                 break;
-            case ("H"):
+            case ("h"):
                 effectIntensity = "High";
                 break;
             default:
@@ -93,10 +93,10 @@ public class Settings {
     void setAmbientOcclusion(String s) {
         s.toUpperCase();
         switch (s) {
-            case ("E"):
+            case ("e"):
                 ambientOcclusion = "Enabled";
                 break;
-            case ("D"):
+            case ("d"):
                 ambientOcclusion = "Disabled";
                 break;
             default:

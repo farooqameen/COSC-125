@@ -18,214 +18,127 @@ public class FinalGame {
     public static void main(String[] args) throws InputMismatchException {
         System.out.println("Welcome to Grimm's Journey!");
 
-        int choice;
+        Scanner input = new Scanner(System.in);
+        int choice = 0;
 
-        try {
-            choice = DisplayMenu();
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid value, exiting program.");
-        }
-        
-        Settings settings1 = new Settings();
-        settings1.displayAll();
+        do {
+            try {
+                choice = DisplayMenu();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid value, exiting program.");
+            }
+            Settings settings1 = new Settings();
+
+            switch (choice) {
+                case (2):
+                    settings1.displayAll();
+                    System.out.println("\nWould you like to change any settings? (y/n)");
+
+                    char changesetting = input.next().charAt(0);
+                    if (changesetting == 'y') {
+                        ChangeSettings(settings1);
+                    } else {
+
+                        System.out.println();
+                    }
+            }
+        } while (choice > 1);
     }
 
     public static int DisplayMenu() {
         int n = 0;
         boolean flag = false;
-        System.out.println("1. New Game\n2. Save Game\n3. Delete Save\n4. Settings\n5. Exit");
-        
+        System.out.println("1. New Game\n2. Settings\n3. Exit");
+
         Scanner userInput = new Scanner(System.in);
 
         do {
 //            System.out.println("Flag: " + flag);
-            System.out.print("Please enter 1-5: ");
+            System.out.print("Please enter 1-3: ");
             n = userInput.nextInt();
             System.out.println();
-            if (n >= 1 && n <= 4) {
+            if (n >= 1 && n <= 2) {
                 flag = true;
-            } else if (n == 5) {
+            } else if (n == 3) {
                 flag = true;
                 System.out.println("Thank you. Goodbye.");
+                System.exit(0);
             } else {
                 flag = false;
                 System.out.println("Invalid choice.");
-                System.out.println("End of stack.\n");
+//                System.out.println("End of stack.\n");
             }
 //            System.out.println("Flag: " + flag);
         } while (flag == false);
         return n;
     }
-}
 
-//    
-//    
-//    
-//    public static class Character {
-//        private int health;
-//        private int mana;
-//        private double damageModif;
-//        private String type;
-//        private static int numberOfCharacters=0;
-//        
-//        Character() {
-//            type=null;
-//            health=0;
-//            mana=0;
-//            damageModif=0;
-//            numberOfCharacters++;
-//        }
-//        void setType(String s) {
-//            type = s.toLowerCase();
-//            switch (type) {
-//                case "warrior":
-//                    health = 75;
-//                    mana = 25;
-//                    damageModif = 0.5;
-//                    break;
-//                case "mage":
-//                    health = 40;
-//                    mana = 60;
-//                    damageModif=0.4;
-//                    break;
-//                case "ninja":
-//                    health = 30;
-//                    mana=35;
-//                    damageModif=0.75;
-//                    break;
-//            }   
-//        }
-//        void displayStats(){
-//            System.out.println("Character type: " + type);
-//            System.out.println("Health: " + health);
-//            System.out.println("Mana: " + mana);
-//            System.out.println("Damage modifier: " + damageModif);
-//            System.out.println("Number of characters created: " + numberOfCharacters);
-//        }
-//    }
-//    
-//    public static class Settings {
-//        int volume;
-//        int fieldOfView;
-//        String textureQuality;
-//        String effectIntensity;
-//        String ambientOcclusion;
-//        
-//        void displayAll() {
-//            System.out.println("The current settings are: ");
-//            displayVolume();
-//            System.out.println("Field of view: " + fieldOfView);
-//            System.out.println("Texture quality: " + textureQuality);
-//            System.out.println("Effect intensity: " + effectIntensity);
-//            System.out.println("Ambient occlusion: " + ambientOcclusion);
-//        }
-//        
-//        void displayVolume() {
-//            System.out.print("Volume: ");
-//            for (int i = 0; i<volume; i++) {
-//                System.out.print("|");
-//            }
-//            for (int i = 0; i<(100-volume); i++) {
-//                System.out.print(".");
-//            }
-//            System.out.println();
-//        }
-//        
-//        void setVolume(int n) {
-//            if (n>=0 && n<=100) {
-//                volume = n;
-//            }
-//            else {
-//                System.out.println("Invalid volume.");
-//            }
-//        }
-//        
-//        void setTextureQuality (String s) {
-//            s.toUpperCase();
-//            switch (s) {
-//                case ("L"):
-//                    textureQuality = "Low";
-//                    break;
-//                case ("M"):
-//                    textureQuality = "Medium";
-//                    break;
-//                case ("H"):
-//                    textureQuality = "High";
-//                    break;
-//                default:
-//                    System.out.println("Invalid texture quality.");
-//                    return;
-//                    
-//            }
-//            System.out.println("The texture quality is now: " + textureQuality);
-//        }
-//        void setEffectIntenisty (String s) {
-//            s.toUpperCase();
-//            switch (s) {
-//                case ("L"):
-//                    effectIntensity = "Low";
-//                    break;
-//                case ("M"):
-//                    effectIntensity = "Medium";
-//                    break;
-//                case ("H"):
-//                    effectIntensity = "High";
-//                    break;
-//                default:
-//                    System.out.println("Invalid effect.");
-//                    return;
-//                    
-//            }
-//            System.out.println("The effect intensity is now: " + effectIntensity);
-//        }
-//        void setAmbientOcclusion (String s) {
-//            s.toUpperCase();
-//            switch (s) {
-//                case ("E"):
-//                    ambientOcclusion = "Enabled";
-//                    break;
-//                case ("D"):
-//                    ambientOcclusion = "Disabled";
-//                    break;
-//                default:
-//                    System.out.println("Invalid ambient occlusion");
-//                    return;
-//                    
-//            }
-//            System.out.println("The ambient occlusion is now: " + effectIntensity);
-//        }
-//        void setFieldOfView(int n) {
-//            if (n>=60 && n<=1110) {
-//                fieldOfView = n;
-//            }
-//            else {
-//                System.out.println("Invalid field of view.");
-//            }
-//        }
-//    }
-//    public static class Terrain {
-//        String terrain;
-//        Terrain() {
-//            Random rand = new Random();
-//            int random;
-//            random = rand.nextInt(3);
-//            switch (random) {
-//                case (0):
-//                    terrain = "desert";
-//                    return;
-//                case (1):
-//                    terrain = "arctic";
-//                    return;
-//                case (2):
-//                    terrain = "forest";
-//                    return;
-//                case (3):
-//                    terrain = "mountainous";
-//                    return;
-//            }      
-//        }
-//        void DisplayTerrain() {
-//            System.out.println("You are in " + terrain + ".");
-//        }
-//    }
-//}
+    public static void ChangeSettings(Settings settings1) throws InputMismatchException {
+        int n = 0;
+        boolean flag = false;
+
+        Scanner userInput = new Scanner(System.in);
+
+        String s;
+        char c;
+        try {
+            do {
+                System.out.println("Which setting would you like to change?\nEnter 1-5:");
+                n = userInput.nextInt();
+                System.out.println();
+                switch (n) {
+                    case (1):
+                        System.out.print("Enter new volume from 1-100: ");
+                        n = userInput.nextInt();
+                        if (n >= 0 && n <= 100) {
+                            settings1.setVolume(n);
+                        } else {
+                            System.out.println("Invalid volume, value not changed.");
+                        }
+                        break;
+                    case (2):
+                        System.out.print("Enter new field of view from 60-110: ");
+                        n = userInput.nextInt();
+                        if (n >= 60 && n <= 110) {
+                            settings1.setFieldOfView(n);
+                        } else {
+                            System.out.println("Invalid field of view, value not changed.");
+                        }
+                        break;
+                    case (3):
+                        System.out.println("Enter the new value (l/m/h): ");
+                        c = userInput.next().charAt(0);
+                        s = String.valueOf(c);
+                        settings1.setTextureQuality(s);
+                        break;
+                    case (4):
+                        System.out.println("Enter the new value (l/m/h): ");
+                        c = userInput.next().charAt(0);
+                        s = String.valueOf(c);
+                        settings1.setEffectIntensity(s);
+                        break;
+                    case (5):
+                        System.out.println("Enter the new value (e/d): ");
+                        c = userInput.next().charAt(0);
+                        s = String.valueOf(c);
+                        settings1.setEffectIntensity(s);
+                        break;
+
+                }
+                System.out.println("Would you like to change any other settings? (y/n)");
+                char changesetting = userInput.next().charAt(0);
+                if (changesetting == 'y') {
+                    flag = false;
+                } else {
+                    flag = true;
+                    System.out.println();
+                    settings1.displayAll();
+                    System.out.println();
+                }
+
+            } while (flag == false);
+        } catch (InputMismatchException e) {
+            System.out.println("An error occured. Goodbye.");
+        }
+    }
+}
