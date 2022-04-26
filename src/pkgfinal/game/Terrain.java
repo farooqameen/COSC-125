@@ -29,11 +29,14 @@ public class Terrain {
                 terrain = "forest";
                 break;
             case (3):
-                terrain = "mountainous";
+                terrain = "mountain";
                 break;
         }
     }
     void DisplayTerrain() {
         System.out.println("You are in " + terrain + ".");
+    }
+    String getTerrain() {
+        return terrain;
     }
 }

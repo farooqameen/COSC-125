@@ -25,28 +25,30 @@ public class Character {
     }
 
     void setType(String s) {
-        type = s.toLowerCase();
-        switch (type) {
-            case "warrior":
+        type = s;
+        switch (s) {
+            case "Warrior":
                 health = 75;
                 mana = 25;
                 damageModif = 0.5;
                 break;
-            case "mage":
+            case "Mage":
                 health = 40;
                 mana = 60;
                 damageModif = 0.4;
                 break;
-            case "ninja":
+            case "Ninja":
                 health = 30;
                 mana = 35;
                 damageModif = 0.75;
                 break;
+            default:
+                System.out.println("Character creation error...");
         }
     }
 
     void displayStats() {
-        System.out.println("Character type: " + type);
+        System.out.println("Character: " + type);
         System.out.println("Health: " + health);
         System.out.println("Mana: " + mana);
         System.out.println("Damage modifier: " + damageModif);

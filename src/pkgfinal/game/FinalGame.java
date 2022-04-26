@@ -45,6 +45,28 @@ public class FinalGame {
             }
         } while (choice != 1);
 
+        NewGame();
+//        System.out.println("Type in your character type (case-sensitive): ");
+//        System.out.println("1. Warrior\n2. Mage\n3. Ninja");
+//        
+//        String charactertype = input.nextLine();
+//        
+//        Character character1 = new Character();
+//        character1.setType(charactertype);
+//        
+//        System.out.println("Your character has been created!");
+//        System.out.println("\nLoading...\n");
+//        
+//        
+//        
+//        Stack battlestck = new Stack();
+//        Boss boss1 = new Boss();
+//        Enemy enemy1 = new Enemy();
+//        Enemy enemy2 = new Enemy();
+//        
+//        battlestck.add(boss1);
+//        battlestck.add(enemy2);
+//        battlestck.add(enemy1);
     }
 
     public static int DisplayMenu() {
@@ -142,5 +164,59 @@ public class FinalGame {
         } catch (InputMismatchException e) {
             System.out.println("An error occured. Goodbye.");
         }
+    }
+    public static void NewGame() {
+        Scanner input = new Scanner(System.in);
+        boolean flag = false;
+        String charactertype;
+        
+        do {
+        System.out.println("Type in your character type (case-sensitive): ");
+        System.out.println("1. Warrior\n2. Mage\n3. Ninja");
+        
+        charactertype = input.nextLine();
+        
+        if (charactertype.equals("Warrior")) {
+            System.out.println("A warrior is born...");
+            flag = true;
+        }
+        else if (charactertype.equals("Mage")) {
+            System.out.println("A mage, long forgotten, has risen...");
+            flag = true;
+        }
+        else if (charactertype.equals("Ninja")) {
+            System.out.println("Born in the shadows...");
+            flag = true;
+        }
+        else {
+            System.out.println("Incorrect character type. Try again.\n");
+            flag = false;
+        }
+        } while (flag == false);
+        
+        Character character1 = new Character();
+        character1.setType(charactertype);
+
+        System.out.println("Your character has been created!");
+        System.out.println("\nLoading...\n");
+        
+        System.out.println("Your character's stats are: ");
+        character1.displayStats();
+        
+        System.out.println("\nGenerating terrain...");
+        Terrain terrain1 = new Terrain();
+        
+        System.out.println("You are in a " + terrain1.getTerrain() + " biome.");
+        
+        System.out.println("\nCreating enemies...");
+        
+        Stack battlestck = new Stack();
+        Boss boss1 = new Boss();
+        Enemy enemy1 = new Enemy();
+        Enemy enemy2 = new Enemy();
+        
+        battlestck.push(boss1);
+        battlestck.push(enemy2);
+        battlestck.push(enemy1);
     }
 }
