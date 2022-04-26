@@ -25,7 +25,8 @@ public class FinalGame {
             try {
                 choice = DisplayMenu();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid value, exiting program.");
+//                System.out.println("Invalid value, exiting program.");
+                System.out.println("An error occured. Goodbye.");
             }
             Settings settings1 = new Settings();
 
@@ -42,7 +43,8 @@ public class FinalGame {
                         System.out.println();
                     }
             }
-        } while (choice > 1);
+        } while (choice != 1);
+
     }
 
     public static int DisplayMenu() {
