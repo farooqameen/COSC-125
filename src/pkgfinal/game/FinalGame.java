@@ -196,21 +196,55 @@ public class FinalGame {
         battlestck.push(boss1.getBossType());
         battlestck.push(enemy1.getEnemyType());
         
-        System.out.println("\nYour enemies are: ");
-        for (int i=0; i<2;i++) {
+        
+        System.out.println("\nEnemies: "); 
+        for (int i=0;i<2;i++) {
             System.out.println(battlestck.pop());
         }
         
+        System.out.println("\nBoss special: " + boss1.getBossSpecial());
+        
         System.out.println("\nLoading questions...");
         
-        Queue question = new PriorityQueue();
+        LinkedList question = new LinkedList<>();
         question = ListOfQuestions();
         
-        Queue answers = new PriorityQueue();
-        answers = ListOfAnswers();
+        LinkedList answer = new LinkedList<>();
+        answer = ListOfAnswers();
         
-        
-        
+//        boolean bossdefeated=false;
+        String userAns;
+        int points=0;
+        try {
+        do {
+            System.out.println("Points = " + points);
+            System.out.println(question.getFirst());
+            System.out.println("Your answer: ");
+            userAns = input.nextLine();
+            if (answer.getFirst().equals(userAns) && points<1) {
+                points++;
+                System.out.println("\nEnemy defeated!");
+                question.removeFirst();
+                answer.removeFirst();
+            }
+            else if (answer.getFirst().equals(userAns) && points>=1) {
+                points++;
+                points++;
+                question.removeFirst();
+                answer.removeFirst();
+                System.out.println("\nBoss defeated!");
+                System.out.println("Well done!");
+            }
+            else {
+                question.removeFirst();
+                System.out.println("Incorrect. The answer was " + answer.removeFirst() + ".");
+                System.out.println("\nNext question...");
+            }
+        } while (points<=3);
+        }
+        catch (NoSuchElementException e) {
+            System.out.println("\nNo more questions.\nGoodbye.");
+        }
 //        question.add("What is the capital of France?");
 //        question.add("How many strings does a bass have?");
 //        question.add("How many oceans are there?");
@@ -219,22 +253,22 @@ public class FinalGame {
         
         
     }
-    public static Queue ListOfQuestions() {
-        Queue q = new PriorityQueue();
-        q.add("What is the capital of France?");
-        q.add("How many strings does a bass have?");
-        q.add("How many oceans are there?");
-        q.add("What is the largest land mammal?");
-        q.add("How many keys are on a piano?");
+    public static LinkedList ListOfQuestions() {
+        LinkedList<String> q = new LinkedList();
+        q.addFirst("What is the capital of France?");
+        q.addFirst("How many strings does a bass have?");
+        q.addFirst("How many oceans are there?");
+        q.addFirst("What is the largest land mammal?");
+        q.addFirst("How many keys are on a piano?");
         return q;
     }
-    public static Queue ListOfAnswers() {
-        Queue a = new PriorityQueue();
-        a.add("Paris");
-        a.add("4");
-        a.add("5");
-        a.add("elephant");
-        a.add("88");
+    public static LinkedList ListOfAnswers() {
+        LinkedList<String> a = new LinkedList();
+        a.addFirst("Paris");
+        a.addFirst("4");
+        a.addFirst("5");
+        a.addFirst("elephant");
+        a.addFirst("88");
         return a;
     }
 }
