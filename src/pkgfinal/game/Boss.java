@@ -35,6 +35,10 @@ public class Boss extends Enemy {
     int getBossDamage() {
         return damage;
     }
+    String getBossType() {
+        String s = "Boss " + getEnemyType();
+        return s;
+    }
     void displayBoss() {
         System.out.println("You have encountered a " + getEnemyType() + " with " + getBossSpecial() + "!");
         System.out.println("The have " + getBossDamage() + " damage!");

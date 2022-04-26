@@ -46,27 +46,6 @@ public class FinalGame {
         } while (choice != 1);
 
         NewGame();
-//        System.out.println("Type in your character type (case-sensitive): ");
-//        System.out.println("1. Warrior\n2. Mage\n3. Ninja");
-//        
-//        String charactertype = input.nextLine();
-//        
-//        Character character1 = new Character();
-//        character1.setType(charactertype);
-//        
-//        System.out.println("Your character has been created!");
-//        System.out.println("\nLoading...\n");
-//        
-//        
-//        
-//        Stack battlestck = new Stack();
-//        Boss boss1 = new Boss();
-//        Enemy enemy1 = new Enemy();
-//        Enemy enemy2 = new Enemy();
-//        
-//        battlestck.add(boss1);
-//        battlestck.add(enemy2);
-//        battlestck.add(enemy1);
     }
 
     public static int DisplayMenu() {
@@ -206,17 +185,56 @@ public class FinalGame {
         System.out.println("\nGenerating terrain...");
         Terrain terrain1 = new Terrain();
         
-        System.out.println("You are in a " + terrain1.getTerrain() + " biome.");
+        System.out.println("You are in a(n) " + terrain1.getTerrain() + " biome.");
         
         System.out.println("\nCreating enemies...");
         
         Stack battlestck = new Stack();
         Boss boss1 = new Boss();
         Enemy enemy1 = new Enemy();
-        Enemy enemy2 = new Enemy();
         
-        battlestck.push(boss1);
-        battlestck.push(enemy2);
-        battlestck.push(enemy1);
+        battlestck.push(boss1.getBossType());
+        battlestck.push(enemy1.getEnemyType());
+        
+        System.out.println("\nYour enemies are: ");
+        for (int i=0; i<2;i++) {
+            System.out.println(battlestck.pop());
+        }
+        
+        System.out.println("\nLoading questions...");
+        
+        Queue question = new PriorityQueue();
+        question = ListOfQuestions();
+        
+        Queue answers = new PriorityQueue();
+        answers = ListOfAnswers();
+        
+        
+        
+//        question.add("What is the capital of France?");
+//        question.add("How many strings does a bass have?");
+//        question.add("How many oceans are there?");
+//        question.add("What is the largest land mammal?");
+//        question.add("How many keys are on a piano?");
+        
+        
+    }
+    public static Queue ListOfQuestions() {
+        Queue q = new PriorityQueue();
+        q.add("What is the capital of France?");
+        q.add("How many strings does a bass have?");
+        q.add("How many oceans are there?");
+        q.add("What is the largest land mammal?");
+        q.add("How many keys are on a piano?");
+        return q;
+    }
+    public static Queue ListOfAnswers() {
+        Queue a = new PriorityQueue();
+        a.add("Paris");
+        a.add("4");
+        a.add("5");
+        a.add("elephant");
+        a.add("88");
+        return a;
     }
 }
