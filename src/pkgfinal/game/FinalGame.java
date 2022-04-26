@@ -25,7 +25,6 @@ public class FinalGame {
             try {
                 choice = DisplayMenu();
             } catch (InputMismatchException e) {
-//                System.out.println("Invalid value, exiting program.");
                 System.out.println("An error occured. Goodbye.");
             }
             Settings settings1 = new Settings();
@@ -56,7 +55,6 @@ public class FinalGame {
         Scanner userInput = new Scanner(System.in);
 
         do {
-//            System.out.println("Flag: " + flag);
             System.out.print("Please enter 1-3: ");
             n = userInput.nextInt();
             System.out.println();
@@ -69,9 +67,7 @@ public class FinalGame {
             } else {
                 flag = false;
                 System.out.println("Invalid choice.");
-//                System.out.println("End of stack.\n");
             }
-//            System.out.println("Flag: " + flag);
         } while (flag == false);
         return n;
     }
@@ -212,7 +208,6 @@ public class FinalGame {
         LinkedList answer = new LinkedList<>();
         answer = ListOfAnswers();
         
-//        boolean bossdefeated=false;
         String userAns;
         int points=0;
         try {
@@ -245,13 +240,6 @@ public class FinalGame {
         catch (NoSuchElementException e) {
             System.out.println("\nNo more questions.\nGoodbye.");
         }
-//        question.add("What is the capital of France?");
-//        question.add("How many strings does a bass have?");
-//        question.add("How many oceans are there?");
-//        question.add("What is the largest land mammal?");
-//        question.add("How many keys are on a piano?");
-        
-        
     }
     public static LinkedList ListOfQuestions() {
         LinkedList<String> q = new LinkedList();
