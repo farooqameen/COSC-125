@@ -4,6 +4,7 @@
  */
 package pkgfinal.game;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -12,31 +13,18 @@ import java.util.Random;
  */
 public class Terrain {
 
-    String terrain;
-
+    private final ArrayList<String> terrain = new ArrayList<>();
+    
     Terrain() {
+        terrain.add("desert");
+        terrain.add("forest");
+        terrain.add("arctic");
+        terrain.add("mountain");
+    }
+    public String getTerrain() {
         Random rand = new Random();
         int random;
         random = rand.nextInt(4);
-        switch (random) {
-            case (0):
-                terrain = "desert";
-                break;
-            case (1):
-                terrain = "arctic";
-                break;
-            case (2):
-                terrain = "forest";
-                break;
-            case (3):
-                terrain = "mountain";
-                break;
-        }
-    }
-    void DisplayTerrain() {
-        System.out.println("You are in " + terrain + ".");
-    }
-    String getTerrain() {
-        return terrain;
+        return terrain.get(random);
     }
 }

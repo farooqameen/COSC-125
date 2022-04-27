@@ -19,15 +19,16 @@ public class Enemy {
         int random;
         random = rand.nextInt(2);
         switch (random) {
-            case (0):
+            case (0) -> {
                 type = "Creepy Crawler";
                 health = 25;
-                break;
-            case (1):
+            }
+            case (1) -> {
                 type = "Winged Rat";
                 health = 35;
-                break;
+            }
         }
+        numberOfEnemies++;
     }
     public String getEnemyType() {
         return type;

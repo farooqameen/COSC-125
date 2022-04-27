@@ -11,8 +11,10 @@ import java.util.Random;
  * @author Farooq Ameen
  */
 public class Boss extends Enemy {
-    String special;
-    int damage;
+
+    private String special;
+    private int damage;
+
     Boss() {
         Random rand = new Random();
         int random;
@@ -20,28 +22,31 @@ public class Boss extends Enemy {
         switch (random) {
             case (0):
                 special = "Double Damage";
-                damage = getEnemyHealth()*2;
+                damage = getEnemyHealth() * 2;
                 break;
             case (1):
                 special = "Double Health";
-                damage = getEnemyHealth()/2;
+                damage = getEnemyHealth() / 2;
                 break;
+        }
+    }
 
-    }
-    }
-    String getBossSpecial() {
+    public String getBossSpecial() {
         return special;
     }
-    int getBossDamage() {
+
+    public int getBossDamage() {
         return damage;
     }
-    String getBossType() {
+
+    public String getBossType() {
         String s = "Boss " + getEnemyType();
         return s;
     }
-    void displayBoss() {
+
+    public void displayBoss() {
         System.out.println("You have encountered a " + getEnemyType() + " with " + getBossSpecial() + "!");
         System.out.println("The have " + getBossDamage() + " damage!");
     }
-    
+
 }

@@ -5,6 +5,7 @@
 package pkgfinal.game;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -24,26 +25,23 @@ public class FinalGame {
         Scanner input = new Scanner(System.in);
         int choice = 0;
 
+        Settings settings1 = new Settings();
+
         do {
             try {
                 choice = DisplayMenu();
             } catch (InputMismatchException e) {
                 System.out.println("An error occured. Goodbye.");
             }
-            Settings settings1 = new Settings();
-
-            switch (choice) {
-                case (2):
-                    settings1.displayAll();
-                    System.out.println("\nWould you like to change any settings? (y/n)");
-
-                    char changesetting = input.next().charAt(0);
-                    if (changesetting == 'y') {
-                        ChangeSettings(settings1);
-                    } else {
-
-                        System.out.println();
-                    }
+            if (choice == 2) {
+                settings1.displayAll();
+                System.out.println("\nWould you like to change any settings? (y/n)");
+                char changesetting = input.next().charAt(0);
+                if (changesetting == 'y') {
+                    ChangeSettings(settings1);
+                } else {
+                    System.out.println();
+                }
             }
         } while (choice != 1);
 
@@ -52,7 +50,7 @@ public class FinalGame {
     }
 
     public static int DisplayMenu() {
-        int n = 0;
+        int n;
         boolean flag = false;
         System.out.println("1. New Game\n2. Settings\n3. Exit");
 
@@ -65,7 +63,6 @@ public class FinalGame {
             if (n >= 1 && n <= 2) {
                 flag = true;
             } else if (n == 3) {
-                flag = true;
                 System.out.println("Thank you. Goodbye.");
                 System.exit(0);
             } else {
@@ -77,20 +74,21 @@ public class FinalGame {
     }
 
     public static void ChangeSettings(Settings settings1) throws InputMismatchException {
-        int n = 0;
-        boolean flag = false;
+
 
         Scanner userInput = new Scanner(System.in);
 
         String s;
+        boolean flag;
         char c;
+        int n;
         try {
             do {
                 System.out.println("Which setting would you like to change?\nEnter 1-5:");
                 n = userInput.nextInt();
                 System.out.println();
                 switch (n) {
-                    case (1):
+                    case (1) -> {
                         System.out.print("Enter new volume from 1-100: ");
                         n = userInput.nextInt();
                         if (n >= 0 && n <= 100) {
@@ -98,8 +96,8 @@ public class FinalGame {
                         } else {
                             System.out.println("Invalid volume, value not changed.");
                         }
-                        break;
-                    case (2):
+                    }
+                    case (2) -> {
                         System.out.print("Enter new field of view from 60-110: ");
                         n = userInput.nextInt();
                         if (n >= 60 && n <= 110) {
@@ -107,25 +105,25 @@ public class FinalGame {
                         } else {
                             System.out.println("Invalid field of view, value not changed.");
                         }
-                        break;
-                    case (3):
+                    }
+                    case (3) -> {
                         System.out.println("Enter the new value (l/m/h): ");
                         c = userInput.next().charAt(0);
                         s = String.valueOf(c);
                         settings1.setTextureQuality(s);
-                        break;
-                    case (4):
+                    }
+                    case (4) -> {
                         System.out.println("Enter the new value (l/m/h): ");
                         c = userInput.next().charAt(0);
                         s = String.valueOf(c);
                         settings1.setEffectIntensity(s);
-                        break;
-                    case (5):
+                    }
+                    case (5) -> {
                         System.out.println("Enter the new value (e/d): ");
                         c = userInput.next().charAt(0);
                         s = String.valueOf(c);
                         settings1.setEffectIntensity(s);
-                        break;
+                    }
 
                 }
                 System.out.println("Would you like to change any other settings? (y/n)");
@@ -147,7 +145,7 @@ public class FinalGame {
 
     public static void NewGame() {
         Scanner input = new Scanner(System.in);
-        boolean flag = false;
+        boolean flag;
         String charactertype;
 
         do {
@@ -157,22 +155,22 @@ public class FinalGame {
             charactertype = input.nextLine();
 
             switch (charactertype) {
-                case "Warrior":
+                case "Warrior" -> {
                     System.out.println("A warrior is born...");
                     flag = true;
-                    break;
-                case "Mage":
+                }
+                case "Mage" -> {
                     System.out.println("A mage, long forgotten, has risen...");
                     flag = true;
-                    break;
-                case "Ninja":
+                }
+                case "Ninja" -> {
                     System.out.println("Born in the shadows...");
                     flag = true;
-                    break;
-                default:
-                    System.out.println("Incorrect character type. Try again.\n");
-                    flag = false;
-                    break;
+                }
+                default -> {
+                        System.out.println("Incorrect character type. Try again.\n");
+                        flag = false;
+                }
             }
         } while (flag == false);
 
@@ -192,19 +190,12 @@ public class FinalGame {
 
         System.out.println("\nCreating enemies...");
 
-        Stack battlestck = new Stack();
-        Boss boss1 = new Boss();
-        Enemy enemy1 = new Enemy();
-
-        battlestck.push(boss1.getBossType());
-        battlestck.push(enemy1.getEnemyType());
+        Stack battlestck = GenerateEnemies();
 
         System.out.println("\nEnemies: ");
         for (int i = 0; i < 2; i++) {
             System.out.println(battlestck.pop());
         }
-
-        System.out.println("\nBoss special: " + boss1.getBossSpecial());
 
         System.out.println("\nLoading questions...");
 
@@ -215,39 +206,27 @@ public class FinalGame {
 //        answer = ListOfAnswers();
 
         String userAns;
-        int points = 0;
+        int points;
         try {
             do {
-                System.out.println("Points = " + points);
+                points = character1.getPoints();
+                System.out.println("Points = " + character1.getPoints());
                 System.out.println(question.getFirst());
                 System.out.println("Your answer: ");
                 userAns = input.nextLine();
-                if (answer.getFirst().equals(userAns) && points < 1) {
-                    points++;
+                if (answer.getFirst().equals(userAns) && character1.getPoints() < 1) {
+                    character1.increasePoints();
                     System.out.println("\nEnemy defeated!");
                     question.removeFirst();
                     answer.removeFirst();
-                } else if (answer.getFirst().equals(userAns) && points >= 1) {
-                    points = points + 2;
+                } else if (answer.getFirst().equals(userAns) && character1.getPoints() >= 1) {
+                    character1.increasePoints();
+                    character1.increasePoints();
                     question.removeFirst();
                     answer.removeFirst();
                     System.out.println("\nBoss defeated!");
                     System.out.println("Well done!");
-                    System.out.println("“⠀⠀⠀⠀⠀⠀⠀⠀⠀⡄⠀⡼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
-                            + "⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣶⡾⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
-                            + "⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣅⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
-                            + "⠀⠀⠀⠀⣠⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"
-                            + "⠀⣀⣴⣾⣿⡿⠋⠀⣠⣶⣶⠿⠿⠿⠿⠷⢶⣶⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀\n"
-                            + "⢰⣿⣿⣿⣟⠀⠀⢸⣿⣿⣥⣤⣤⣄⣀⣀⣠⣬⣭⣿⠁⠀⠀⠀⠀⠀⠀⠀\n"
-                            + "⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣤⣄⠀⠀⠀⠀\n"
-                            + "⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⠀\n"
-                            + "⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠈⠙⠿⣿⣿\n"
-                            + "⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⣀⣹\n"
-                            + "⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⣀⣤⣶⡿⠿⠟\n"
-                            + "⠀⠀⠀⠀⠀⠀⠈⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠰⣿⠇⠀⠀⠀⠀\n"
-                            + "⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⡍⠉⠉⠙⠛⠛⠋⣩⣥⣤⣀⠀⠀⠀⠀⠀⠀⠀\n"
-                            + "⠀⠀⠀⠀⠀⠀⠻⢿⡋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠉⣻⡿⠿⠂⠀⠀⠀⠀⠀");
-                    System.out.println();
+                    Credits();
                 } else {
                     question.removeFirst();
                     System.out.println("Incorrect. The answer was " + answer.removeFirst() + ".");
@@ -279,6 +258,20 @@ public class FinalGame {
         return a;
     }
 
+    public static Stack GenerateEnemies() {
+        Stack gang = new Stack();
+        for (int i = 0; i < 6; i++) {
+            Boss boss1 = new Boss();
+            Enemy enemy1 = new Enemy();
+            gang.push(boss1.getBossType());
+            gang.push(enemy1.getEnemyType());
+            gang.push(boss1.getBossSpecial());
+        }
+
+        System.out.println("WARNING, BOSS SPECIAL: " + gang.pop());
+        return gang;
+    }
+
     public static void Feedback() {
 
         try {
@@ -296,18 +289,23 @@ public class FinalGame {
             mywriter.write(input.nextLine());
 
             System.out.println("\nFeedback received successfully!");
-
-            Scanner reader = new Scanner(feedback);
-            while (reader.hasNextLine()) {
-                String data = reader.nextLine();
-                System.out.println("\nJust to confirm, your feedback was: \n" + data);
-
-                mywriter.close();
-                reader.close();
-            }
+            mywriter.close();
         } catch (IOException e) {
             System.out.println("File error.");
         }
+    }
 
+    public static void Credits() {
+        try {
+            File readfrom = new File("credits.txt");
+            Scanner input = new Scanner(readfrom);
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                System.out.println(line);
+            }
+            input.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("\nAn error has occured.\nGoodbye");
+        }
     }
 }
