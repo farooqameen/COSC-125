@@ -75,7 +75,6 @@ public class FinalGame {
 
     public static void ChangeSettings(Settings settings1) throws InputMismatchException {
 
-
         Scanner userInput = new Scanner(System.in);
 
         String s;
