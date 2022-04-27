@@ -25,7 +25,7 @@ public class Character {
         numberOfCharacters++;
     }
 
-    void setType(String s) {
+    public void setType(String s) {
         type = s;
         switch (s) {
             case "Warrior" -> {
